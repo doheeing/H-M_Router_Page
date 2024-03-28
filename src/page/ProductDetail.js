@@ -14,7 +14,8 @@ const ProductDetail = () => {
     console.log(data);
     setProduct(data);
   };
-  const detailSize = (size) => {};
+  const [detailSize, setDetailSize] = useState("");
+
 
   useEffect(() => {
     getProductDetail();
@@ -36,8 +37,7 @@ const ProductDetail = () => {
               variant="Secondary"
               id="dropdown-basic"
               className="basic-font"
-            >
-              사이즈 선택
+            >{detailSize==""?"사이즈 선택":detailSize}
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {product?.size.length > 0 &&
@@ -45,7 +45,7 @@ const ProductDetail = () => {
                   <Dropdown.Item
                     href="#/action-1"
                     className="basic-font"
-                    onClick={() => detailSize(size)}
+                    onClick={() => setDetailSize(size)}
                   >
                     {size}
                   </Dropdown.Item>
