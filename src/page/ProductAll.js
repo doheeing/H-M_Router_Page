@@ -12,7 +12,7 @@ const ProductAll = (setAuthenticate) => {
   const getProducts = async () => {
     let searchQuery = query.get("q") ||"";
     console.log("query값은", searchQuery)
-    let url = `http://localhost:5000/products?q=${searchQuery}`;
+    let url = `https://my-json-server.typicode.com/doheeing/H-M_Router_Page/products?q=${searchQuery}`;
     let response = await fetch(url);
     let data = await response.json();
     setProductList(data);
@@ -21,11 +21,11 @@ const ProductAll = (setAuthenticate) => {
     getProducts();
   }, [query]);
   return (
-    <div>
+    <div className="mt-3">
       <Container>
         <Row>
           {productList.map((item) => (
-            <Col lg={3}>
+            <Col lg={3} md={6}sm={12}>
               <ProductCard item={item} />
             </Col>
           ))}
