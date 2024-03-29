@@ -3,9 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./page/LoginPage";
 import ProductAll from "./page/ProductAll";
-import ProductDetail from "./page/ProductDetail";
 import Navbar from "./component/Navbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import PrivateRoute from "./route/PrivateRoute";
 
@@ -22,9 +20,7 @@ import PrivateRoute from "./route/PrivateRoute";
 
 function App() {
   const [authenticate, setAuthenticate] = useState(false); // true면 로그인이 됨, false 면 로그인이 안됨
-  useEffect(() => {
-    console.log("setAuthenticate", authenticate);
-  }, [authenticate]);
+  useEffect(() => {}, [authenticate]);
 
   return (
     <div>

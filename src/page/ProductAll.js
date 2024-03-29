@@ -5,13 +5,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
 const ProductAll = (setAuthenticate) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [productList, setProductList] = useState([]);
   const [query, setQuery] = useSearchParams();
 
   const getProducts = async () => {
-    let searchQuery = query.get("q") ||"";
-    console.log("query값은", searchQuery)
+    let searchQuery = query.get("q") || "";
     let url = `https://my-json-server.typicode.com/doheeing/H-M_Router_Page/products?q=${searchQuery}`;
     let response = await fetch(url);
     let data = await response.json();
@@ -25,7 +24,7 @@ const ProductAll = (setAuthenticate) => {
       <Container>
         <Row>
           {productList.map((item) => (
-            <Col lg={3} md={6}sm={12}>
+            <Col lg={3} md={6} sm={12}>
               <ProductCard item={item} />
             </Col>
           ))}

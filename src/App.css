@@ -111,7 +111,7 @@ body {
   border-bottom: 1px solid black;
 }
 
-.product-card:hover {
+.product-card-hover:hover {
   transform: scale(1.1);
   transition: transform 0.3s;
 }
@@ -143,6 +143,13 @@ body {
   box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
     7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
 }
+.detail-size-area{
+  background-color: rgba(242, 230, 209, 0.958);
+  height: 40px;
+  padding: 10px;
+  padding-left: 25px;
+  margin-bottom: 10px;
+}
 .size-toggle {
   border: 1px solid black;
   width: fit-content;
@@ -151,6 +158,15 @@ body {
 }
 .product-title {
   font-size: 25px;
+}
+.product-title-like-area{
+  display: flex;
+  justify-content: space-between;
+}
+.product-title-like-area button{
+  border: none;
+  background-color: white;
+  font-size: 20px;
 }
 .basic-font-conscious {
   font-family: "Pretendard-Regular";
