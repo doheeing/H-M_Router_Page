@@ -1,15 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import Dropdown from "react-bootstrap/Dropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faL } from "@fortawesome/free-solid-svg-icons";
+import {
+  faHeart,
+  faCartShopping,
+  faBagShopping,
+  faRuler,
+  faEnvelope,
+  faStore,
+  faCircleInfo,
+} from "@fortawesome/free-solid-svg-icons";
 import { faHeart as anotherFaHeart } from "@fortawesome/free-regular-svg-icons";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import ToggleButton from "react-bootstrap/ToggleButton";
+import Button from "react-bootstrap/Button";
+import Accordion from "react-bootstrap/Accordion";
 
 const ProductDetail = () => {
   let { id } = useParams();
+  const [checked, setChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState("1");
   const [product, setProduct] = useState(null);
   const [detailSize, setDetailSize] = useState("");
+  const [quantity, SetQuantity] = useState("0");
+
   const [heartLike, setHeartLike] = useState(false);
   const getProductDetail = async () => {
     let url = `https://my-json-server.typicode.com/doheeing/H-M_Router_Page/products/${id}`;
@@ -17,17 +32,22 @@ const ProductDetail = () => {
     let data = await response.json();
     setProduct(data);
   };
-
+  const radios = [
+    { name: "S", value: "1" },
+    { name: "M", value: "2" },
+    { name: "L", value: "3" },
+  ];
   useEffect(() => {
     getProductDetail();
-  }, []);
+    console.log("quantity", quantity);
+  }, [quantity]);
   return (
     <Container>
-      <Row>
-        <Col className="product-img">
+      <Row className="mt-3">
+        <Col className="product-img" lg={6} md={6} sm={12}>
           <img src={product?.img} />
         </Col>
-        <Col className="mt-5">
+        <Col className="mt-5" lg={6} md={6} sm={12}>
           <div className="product-title-like-area">
             <div className="basic-font product-title">{product?.title}</div>
             <button>
@@ -48,31 +68,69 @@ const ProductDetail = () => {
           <div className="basic-font">
             {product?.choice == true ? "Conscious Choice" : ""}
           </div>
-          <Dropdown className="size-toggle">
-            <Dropdown.Toggle
-              variant="Secondary"
-              id="dropdown-basic"
-              className="basic-font"
-            >
-              {detailSize == "" ? "사이즈 선택" : detailSize}
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {product?.size.length > 0 &&
-                product.size.map((size) => (
-                  <Dropdown.Item
-                    href="#/action-1"
-                    className="basic-font"
-                    onClick={() => setDetailSize(size)}
-                  >
-                    {size}
-                  </Dropdown.Item>
-                ))}
-            </Dropdown.Menu>
-          </Dropdown>
-
-          <div className="detail-size-area">{detailSize}</div>
-
-          <button className="add-button">추가</button>
+          <ButtonGroup className="mt-2">
+            {radios.map((radio, idx) => (
+              <ToggleButton
+                key={idx}
+                id={`radio-${idx}`}
+                type="radio"
+                variant={idx % 2 ? "outline-success" : "outline-danger"}
+                name="radio"
+                value={radio.value}
+                checked={radioValue === radio.value}
+                onChange={(e) => setRadioValue(e.currentTarget.value)}
+                onClick={() => setDetailSize(radio.name)}
+              >
+                {radio.name}
+              </ToggleButton>
+            ))}
+          </ButtonGroup>
+          <div className="more-info">
+            <button>
+              <FontAwesomeIcon icon={faRuler} className="mx-1" />
+              사이즈 가이드
+            </button>
+            <button>
+              <FontAwesomeIcon icon={faEnvelope} className="mx-1" />
+              원하는 사이즈가 품절인가요?
+            </button>
+          </div>
+          {/* <div className="detail-size-area">{detailSize}</div> */}
+          <div className="detail-button mt-3">
+            <Button variant="primary">
+              <FontAwesomeIcon icon={faCartShopping} className="mx-2" />
+              장바구니에 추가
+            </Button>
+            <Button variant="dark">
+              <FontAwesomeIcon icon={faBagShopping} className="mx-2" /> 바로
+              구매하기
+            </Button>
+          </div>
+          <div className="delivery-area">
+            <div className="store-info">
+              <FontAwesomeIcon icon={faStore} className="mx-2" /> 매장내 재고
+              없음
+            </div>
+            <div>
+              <FontAwesomeIcon icon={faCircleInfo} className="mx-2" /> 배송
+              기간: 영업일 기준 2-3일
+            </div>
+            <button>배송 및 결제</button>
+          </div>
+          <Accordion className="mt-5 mb-5">
+            <Accordion.Item eventKey="0" >
+              <Accordion.Header className="accordion">설명 & 핏</Accordion.Header>
+              <Accordion.Body></Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1" className="accordion">
+              <Accordion.Header>소재</Accordion.Header>
+              <Accordion.Body></Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2" className="accordion">
+              <Accordion.Header>케어 가이드</Accordion.Header>
+              <Accordion.Body></Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </Col>
       </Row>
     </Container>

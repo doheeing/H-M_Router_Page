@@ -128,22 +128,7 @@ body {
   display: flex;
   justify-content: flex-end;
 }
-.add-button {
-  background: #000;
-  color: #fff;
-  line-height: 42px;
-  padding: 0;
-  border: none;
-  height: 35px;
-  width: 100%;
-}
-.add-button:hover {
-  background: transparent;
-  color: #000;
-  box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,
-    7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
-}
-.detail-size-area{
+.detail-size-area {
   background-color: rgba(242, 230, 209, 0.958);
   height: 40px;
   padding: 10px;
@@ -156,17 +141,61 @@ body {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.detail-button button {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 5px;
+  font-family: "Pretendard-Regular";
+  font-weight: 100;
+}
+
 .product-title {
   font-size: 25px;
 }
-.product-title-like-area{
+.product-title-like-area {
   display: flex;
   justify-content: space-between;
 }
-.product-title-like-area button{
+.product-title-like-area button {
   border: none;
   background-color: white;
   font-size: 20px;
+}
+.more-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-family: "Pretendard-Regular";
+  font-weight: 100;
+  font-size: 13px;
+}
+.more-info button {
+  border: none;
+  background: none;
+}
+.store-info {
+  color: rgba(69, 67, 67, 0.709);
+}
+.delivery-area {
+  font-family: "Pretendard-Regular";
+  font-weight: 100;
+  font-size: 13px;
+  margin-top: 20px;
+}
+.delivery-area div {
+  margin: 10px;
+}
+.delivery-area button {
+  border: none;
+  background: none;
+  font-size: 18px;
+  margin: 10px;
+}
+.delivery-area button:hover {
+  color: rgb(54, 54, 54);
 }
 .basic-font-conscious {
   font-family: "Pretendard-Regular";
@@ -209,5 +238,8 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+  }
+  .product-img img {
+    max-width: 100%;
   }
 }
