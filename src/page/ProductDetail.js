@@ -16,22 +16,21 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ToggleButton from "react-bootstrap/ToggleButton";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
+import { useDispatch, useSelector } from "react-redux";
+import { productAction } from "../redux/actions/productAction";
 
 const ProductDetail = () => {
   let { id } = useParams();
   const [checked, setChecked] = useState(false);
   const [radioValue, setRadioValue] = useState("1");
-  const [product, setProduct] = useState(null);
   const [detailSize, setDetailSize] = useState("");
-  const [quantity, SetQuantity] = useState("0");
-
   const [heartLike, setHeartLike] = useState(false);
+  const product = useSelector((state) => state.product.selectedItem);
+  const dispatch = useDispatch();
   const getProductDetail = async () => {
-    let url = `https://my-json-server.typicode.com/doheeing/H-M_Router_Page/products/${id}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    setProduct(data);
+    dispatch(productAction.getProductDetail(id));
   };
+
   const radios = [
     { name: "S", value: "1" },
     { name: "M", value: "2" },
@@ -39,8 +38,7 @@ const ProductDetail = () => {
   ];
   useEffect(() => {
     getProductDetail();
-    console.log("quantity", quantity);
-  }, [quantity]);
+  }, );
   return (
     <Container>
       <Row className="mt-3">
@@ -64,8 +62,8 @@ const ProductDetail = () => {
               )}
             </button>
           </div>
-          <h5 className="basic-font mt-1">&#8361;{product?.price}</h5>
-          <div className="basic-font">
+          <h5 className="basic-font mt-1">&#8361;{product?.price.toLocaleString()}</h5>
+          <div className="basic-font-conscious">
             {product?.choice == true ? "Conscious Choice" : ""}
           </div>
           <ButtonGroup className="mt-2">
@@ -118,8 +116,10 @@ const ProductDetail = () => {
             <button>배송 및 결제</button>
           </div>
           <Accordion className="mt-5 mb-5">
-            <Accordion.Item eventKey="0" >
-              <Accordion.Header className="accordion">설명 & 핏</Accordion.Header>
+            <Accordion.Item eventKey="0">
+              <Accordion.Header className="accordion">
+                설명 & 핏
+              </Accordion.Header>
               <Accordion.Body></Accordion.Body>
             </Accordion.Item>
             <Accordion.Item eventKey="1" className="accordion">

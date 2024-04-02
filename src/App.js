@@ -19,22 +19,13 @@ import PrivateRoute from "./route/PrivateRoute";
 // 9. 상품을 검색할 수 있다
 
 function App() {
-  const [authenticate, setAuthenticate] = useState(false); // true면 로그인이 됨, false 면 로그인이 안됨
-  useEffect(() => {}, [authenticate]);
-
   return (
     <div>
-      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
+      <Navbar />
       <Routes>
         <Route path="/" element={<ProductAll />} />
-        <Route
-          path="/login"
-          element={<LoginPage setAuthenticate={setAuthenticate} />}
-        />
-        <Route
-          path="/products/:id"
-          element={<PrivateRoute authenticate={authenticate} />}
-        />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/products/:id" element={<PrivateRoute />} />
       </Routes>
     </div>
   );

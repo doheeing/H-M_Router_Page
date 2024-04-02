@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faBars,
+  faListSquares,
+} from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticateAction } from "../redux/actions/authenticateAction";
 
-const Navbar = ({ authenticate, setAuthenticate }) => {
+const Navbar = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authenticate = useSelector((state) => state.auth.authenticate);
   let [width, setWidth] = useState(0);
   const gotoMainPage = () => {
     navigate("/");
@@ -20,17 +28,14 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
     if (authenticate == false) {
       //로그아웃상태면
       navigate("/login"); // 로그인 페이지로 이동
+      console.log("로그아웃상태")
     } else {
       //로그인 상태면
-      setAuthenticate(false);
+      dispatch(authenticateAction.logout);
       navigate("/login");
+      console.log("로그인상태")
     }
   };
-  const checkLogin = () => {
-    return authenticate == true ? "로그아웃" : "로그인";
-  };
-  const openNav = () => {};
-
   const menulist = [
     "Women",
     "Men",
@@ -60,7 +65,7 @@ const Navbar = ({ authenticate, setAuthenticate }) => {
         <div className="login-button">
           <FontAwesomeIcon icon={faUser} />
           <div onClick={changeToLogin} className="login-text">
-            {checkLogin()}
+            {authenticate ? "로그아웃" : "로그인"}
           </div>
         </div>
       </div>
