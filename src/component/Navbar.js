@@ -25,15 +25,14 @@ const Navbar = () => {
     }
   };
   const changeToLogin = () => {
+    console.log("authenticate", authenticate)
     if (authenticate == false) {
       //로그아웃상태면
       navigate("/login"); // 로그인 페이지로 이동
-      console.log("로그아웃상태")
     } else {
       //로그인 상태면
-      dispatch(authenticateAction.logout);
+      dispatch(authenticateAction.logout());
       navigate("/login");
-      console.log("로그인상태")
     }
   };
   const menulist = [

@@ -17,7 +17,7 @@ import ToggleButton from "react-bootstrap/ToggleButton";
 import Button from "react-bootstrap/Button";
 import Accordion from "react-bootstrap/Accordion";
 import { useDispatch, useSelector } from "react-redux";
-import { productAction } from "../redux/actions/productAction";
+import { fetchProductDetail } from "../redux/reducers/productDetailSlice";
 
 const ProductDetail = () => {
   let { id } = useParams();
@@ -27,8 +27,9 @@ const ProductDetail = () => {
   const [heartLike, setHeartLike] = useState(false);
   const product = useSelector((state) => state.product.selectedItem);
   const dispatch = useDispatch();
-  const getProductDetail = async () => {
-    dispatch(productAction.getProductDetail(id));
+  const getProductDetail = () => {
+    dispatch(fetchProductDetail(id));
+    console.log("data", product);
   };
 
   const radios = [
@@ -38,7 +39,7 @@ const ProductDetail = () => {
   ];
   useEffect(() => {
     getProductDetail();
-  }, );
+  });
   return (
     <Container>
       <Row className="mt-3">
@@ -62,7 +63,9 @@ const ProductDetail = () => {
               )}
             </button>
           </div>
-          <h5 className="basic-font mt-1">&#8361;{product?.price.toLocaleString()}</h5>
+          <h5 className="basic-font mt-1">
+            &#8361;{product?.price.toLocaleString()}
+          </h5>
           <div className="basic-font-conscious">
             {product?.choice == true ? "Conscious Choice" : ""}
           </div>
