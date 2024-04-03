@@ -25,7 +25,7 @@ const ProductDetail = () => {
   const [radioValue, setRadioValue] = useState("1");
   const [detailSize, setDetailSize] = useState("");
   const [heartLike, setHeartLike] = useState(false);
-  const product = useSelector((state) => state.product.selectedItem);
+  const product = useSelector((state) => state.detail.selectedItem);
   const dispatch = useDispatch();
   const getProductDetail = () => {
     dispatch(fetchProductDetail(id));

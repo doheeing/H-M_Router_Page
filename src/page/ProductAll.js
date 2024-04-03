@@ -23,7 +23,7 @@ const ProductAll = () => {
     <div className="mt-3">
       <Container>
         <Row>
-          {productList.map((item) => (
+          {productList && productList.map((item) => (
             <Col lg={3} md={6} sm={12}>
               <ProductCard item={item} />
             </Col>
